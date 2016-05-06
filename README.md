@@ -53,6 +53,7 @@ The following properties can be configured:
 			<td>If you want to use a relay to turn of the mirror provide the pin here. If no pin is provided HDMI is turned off instead.<br>
 				<br><b>Possible values:</b> <code>int</code>
 				<br><b>Default value:</b> <code>none</code>
+				<br><b>Note:</b> Please use BCM-numbering.
 			</td>
 		</tr>
 		<tr>
