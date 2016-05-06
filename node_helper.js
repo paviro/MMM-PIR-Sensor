@@ -16,18 +16,18 @@ module.exports = NodeHelper.create({
     this.started = false
   },
   activateMonitor: function () {
-    if (this.config.relayPIN) {
+    if (this.config.relayPIN != false) {
       gpio.digitalWrite(this.config.relayPIN, this.config.relayOnState)
     }
-    else{
+    else if (this.config.relayPIN == false){
       exec("/opt/vc/bin/tvservice -p", null);
     }
   },
   deactivateMonitor: function () {
-    if (this.config.relayPIN) {
+    if (this.config.relayPIN != false) {
       gpio.digitalWrite(this.config.relayPIN, this.config.relayOffState)
     }
-    else{
+    else if (this.config.relayPIN == false){
       exec("/opt/vc/bin/tvservice -o", null);
     }
   },
@@ -46,7 +46,7 @@ module.exports = NodeHelper.create({
       if (this.config.relayPIN) {
         exec("echo '" + this.config.relayPIN.toString() + "' > /sys/class/gpio/export", null);
         exec("echo 'out' > /sys/class/gpio/gpio" + this.config.relayPIN.toString() + "/direction", null);
-        this.activateMonitor()
+        exec("echo '1' > /sys/class/gpio/gpio" + this.config.relayPIN.toString() + "/value", null);
       }
       
       //Set gpio-mode
