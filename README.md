@@ -63,34 +63,6 @@ The following properties can be configured:
 				<br><b>Default value:</b> <code>1</code>
 			</td>
 		</tr>
-		<tr>
-			<td><code>maximumEntries</code></td>
-			<td>Maximum number of todos to be shown.<br>
-				<br><b>Possible values:</b> <code>time</code> in <code>min</code>
-				<br><b>Default value:</b> <code>60</code>
-			</td>
-		</tr>
-		<tr>
-			<td><code>interval</code></td>
-			<td>How often the module should load new todos.<br>
-				<br><b>Possible values:</b> <code>int</code> in <code>seconds</code>
-				<br><b>Default value:</b> <code>60</code>
-			</td>
-		</tr>
-		<tr>
-			<td><code>fade</code></td>
-			<td>Fade todos to black. (Gradient)<br>
-				<br><b>Possible values:</b> <code>true</code> or <code>false</code>
-				<br><b>Default value:</b> <code>true</code>
-			</td>
-		</tr>
-		<tr>
-			<td><code>fadePoint</code></td>
-			<td>Where to start fade?<br>
-				<br><b>Possible values:</b> <code>0</code> (top of the list) - <code>1</code> (bottom of list)
-				<br><b>Default value:</b> <code>0.25</code>
-			</td>
-		</tr>
 	</tbody>
 </table>
 
