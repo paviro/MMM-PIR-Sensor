@@ -4,6 +4,7 @@ This an extension for the [MagicMirror](https://github.com/MichMich/MagicMirror)
 ## Installation
 1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/paviro/MMM-PIR-Sensor.git`. A new folder will appear navigate into it.
 2. Execute `npm install` to install the node dependencies.
+3. Add your user (`pi`?) to the `gpio group` by executing `sudo useradd -g pi gpio`.
 
 ## Using the module
 

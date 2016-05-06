@@ -1,7 +1,7 @@
 {
   "name": "Magic-Mirror-Module-PIR-Sensor",
   "version": "1.0.0",
-  "description": "Wunderlist module for the Magic Mirror.",
+  "description": "PIR motion sensor module for the Magic Mirror.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/paviro/MMM-PIR-Sensor"
