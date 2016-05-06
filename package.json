@@ -1,0 +1,26 @@
+{
+  "name": "Magic-Mirror-Module-PIR-Sensor",
+  "version": "1.0.0",
+  "description": "Wunderlist module for the Magic Mirror.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paviro/MMM-PIR-Sensor"
+  },
+  "keywords": [
+    "magic mirror",
+    "smart mirror",
+    "PIR-Sensor",
+    "module",
+    "motion"
+  ],
+  "author": "Paul-Vincent Roll",
+  "contributors": "https://github.com/paviro/MMM-PIR-Sensor/graphs/contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paviro/MMM-PIR-Sensor/issues"
+  },
+  "homepage": "https://github.com/paviro/MMM-PIR-Sensor#readme",
+  "dependencies": {
+    "wiring-pi": "latest"
+    }
+}
