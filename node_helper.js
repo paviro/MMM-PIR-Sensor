@@ -46,6 +46,7 @@ module.exports = NodeHelper.create({
       if (this.config.relayPIN) {
         exec("echo '" + this.config.relayPIN.toString() + "' > /sys/class/gpio/export", null);
         exec("echo 'out' > /sys/class/gpio/gpio" + this.config.relayPIN.toString() + "/direction", null);
+        this.activateMonitor()
       }
       
       //Set gpio-mode
