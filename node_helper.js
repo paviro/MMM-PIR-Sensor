@@ -20,7 +20,7 @@ module.exports = NodeHelper.create({
       gpio.digitalWrite(this.config.relayPIN, this.config.relayOnState)
     }
     else if (this.config.relayPIN == false){
-      exec("/opt/vc/bin/tvservice -p", null);
+      exec("/opt/vc/bin/tvservice --preferred && sudo chvt 6 && sudo chvt 7", null);
     }
   },
   deactivateMonitor: function () {
