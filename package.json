@@ -1,6 +1,6 @@
 {
   "name": "Magic-Mirror-Module-PIR-Sensor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "PIR motion sensor module for the Magic Mirror.",
   "repository": {
     "type": "git",
@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/paviro/MMM-PIR-Sensor#readme",
   "dependencies": {
-    "wiring-pi": "latest"
+    "onoff": "latest"
     }
 }
