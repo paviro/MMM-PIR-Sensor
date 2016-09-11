@@ -51,7 +51,7 @@ module.exports = NodeHelper.create({
       }
       
       //Detected movement
-      pir.watch(function(err, value) {
+      this.pir.watch(function(err, value) {
         if (value == 1) {
           self.sendSocketNotification("USER_PRESENCE", true);
           if (self.config.powerSaving){
