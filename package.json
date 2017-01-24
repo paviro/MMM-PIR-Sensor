@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/paviro/MMM-PIR-Sensor#readme",
   "scripts": {
-    "postinstall": "node_modules/.bin/electron-rebuild -e ../../node_modules/electron-prebuilt"
+    "postinstall": "node_modules/.bin/electron-rebuild -e ../../node_modules/electron"
   },
   "dependencies": {
     "onoff": "latest"
