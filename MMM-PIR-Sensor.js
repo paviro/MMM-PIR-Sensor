@@ -9,6 +9,8 @@
 
 Module.register('MMM-PIR-Sensor',{
 
+	requiresVersion: "2.1.0",
+
 	defaults: {
 		sensorPIN: 22,
 		relayPIN: false,
