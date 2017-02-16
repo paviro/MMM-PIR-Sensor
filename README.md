@@ -52,6 +52,13 @@ The following properties can be configured:
 			</td>
 		</tr>
 		<tr>
+			<td><code>powerSavingDelay</code></td>
+			<td>Additional software side delay (in seconds) before the monitor will be turned off.<br>
+				<br><b>Possible values:</b> <code>int</code>
+				<br><b>Default value:</b> <code>0</code>
+			</td>
+		</tr>
+		<tr>
 			<td><code>relayPIN</code></td>
 			<td>If you want to use a relay to turn of the mirror provide the pin here. If no pin is provided HDMI is turned off instead.<br>
 				<br><b>Possible values:</b> <code>int</code>
