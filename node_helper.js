@@ -21,7 +21,7 @@ module.exports = NodeHelper.create({
       this.relay.writeSync(this.config.relayOnState);
     }
     else if (this.config.relayPIN == false){
-      exec("/opt/vc/bin/tvservice --preferred && sudo chvt 6 && sudo chvt 7", null);
+      exec("/opt/vc/bin/tvservice --preferred && chvt 6 && chvt 7", null);
     }
   },
 
@@ -48,7 +48,7 @@ module.exports = NodeHelper.create({
       if (this.config.relayPIN) {
         this.relay = new Gpio(this.config.relayPIN, 'out');
         this.relay.writeSync(this.config.relayOnState);
-        exec("/opt/vc/bin/tvservice --preferred && sudo chvt 6 && sudo chvt 7", null);
+        exec("/opt/vc/bin/tvservice --preferred && chvt 6 && chvt 7", null);
       }
 
       //Detected movement
