@@ -5,7 +5,7 @@ This an extension for the [MagicMirror](https://github.com/MichMich/MagicMirror)
 1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/paviro/MMM-PIR-Sensor.git`. A new folder will appear navigate into it.
 2. Execute `npm install` to install the node dependencies.
 3. Add your user (`pi`?) to the `gpio group` by executing `sudo usermod -a -G gpio pi`.
-4. Turning on/off the hdmi output needs a sudo command. If you are asked for password when executing some sudo command, you need to disable that. Execute `sudo visudo` and add following line `pi ALL=(ALL) NOPASSWD: ALL`.
+4. Execute `sudo chmod u+s /opt/vc/bin/tvservice && sudo chmod u+s /bin/chvt` to allow turning on/off the hdmi output.
 5. Reboot your Pi.
 
 ## Using the module
