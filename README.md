@@ -73,6 +73,20 @@ The following properties can be configured:
 				<br><b>Default value:</b> <code>1</code>
 			</td>
 		</tr>
+		<tr>
+			<td><code>useOfficialTouchscreen</code></td>
+			<td>Whether or not you want to use the official 7 inch touch screen from the raspberry pi foundation.<br>
+				<br><b>Possible values:</b> <code>boolean</code>
+				<br><b>Default value:</b> <code>false</code>
+			</td>
+		</tr>
+		<tr>
+			<td><code>officialTouchscreenBrightness</code></td>
+			<td>When the screen turns on, how bright should it be. Max is 255, and you probably want something under 100 to reduce the amount of light bleed.<br>
+				<br><b>Possible values:</b> <code>int</code>
+				<br><b>Default value:</b> <code>50</code>
+			</td>
+		</tr>
 	</tbody>
 </table>
 
