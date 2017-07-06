@@ -13,9 +13,10 @@ Module.register('MMM-PIR-Sensor',{
 
 	defaults: {
 		sensorPIN: 22,
+		invertSensorValue: false,
 		relayPIN: false,
-		powerSaving: true,
 		relayOnState: 1,
+    powerSaving: true,
 		powerSavingDelay: 0,
 		useOfficialTouchscreen: false,
 		officialTouchscreenBrightness: 50

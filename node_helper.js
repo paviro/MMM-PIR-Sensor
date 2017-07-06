@@ -54,6 +54,10 @@ module.exports = NodeHelper.create({
       const self = this;
       this.config = payload;
 
+      // Setup value which represent on and off
+      const valueOn = this.config.invertSensorValue ? 0 : 1;
+      const valueOff = this.config.invertSensorValue ? 1 : 0;
+
       //Setup pins
       this.pir = new Gpio(this.config.sensorPIN, 'in', 'both');
       // exec("echo '" + this.config.sensorPIN.toString() + "' > /sys/class/gpio/export", null);
@@ -67,14 +71,14 @@ module.exports = NodeHelper.create({
 
       //Detected movement
       this.pir.watch(function(err, value) {
-        if (value == 1) {
+        if (value == valueOn) {
           self.sendSocketNotification("USER_PRESENCE", true);
           if (self.config.powerSaving){
             clearTimeout(self.deactivateMonitorTimeout);
             self.activateMonitor();
           }
         }
-        else if (value == 0) {
+        else if (value == valueOff) {
           self.sendSocketNotification("USER_PRESENCE", false);
           if (!self.config.powerSaving){
             return;
