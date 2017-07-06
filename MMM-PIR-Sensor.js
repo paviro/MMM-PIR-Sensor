@@ -13,10 +13,11 @@ Module.register('MMM-PIR-Sensor',{
 
 	defaults: {
 		sensorPIN: 22,
+		invertSensorValue: false,
 		relayPIN: false,
-		powerSaving: true,
 		relayOnState: 1,
-		powerSavingDelay: 0
+		powerSaving: true,
+		powerSavingDelay: 0,
 	},
 
 	// Override socket notification handler.
