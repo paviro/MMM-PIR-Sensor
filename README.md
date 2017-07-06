@@ -45,6 +45,13 @@ The following properties can be configured:
 			</td>
 		</tr>
 		<tr>
+			<td><code>invertSensorValue</code></td>
+			<td>Invert the sensor value on the given sensorPIN. 1 -> no pressence, 0 -> presence detected<br>
+				<br><b>Possible values:</b> <code>boolean</code>
+				<br><b>Default value:</b> <code>false</code>
+			</td>
+		</tr>
+		<tr>
 			<td><code>powerSaving</code></td>
 			<td>Should the monitor be turned off if no user is present? (via HDMI or relay)<br>
 				<br><b>Possible values:</b> <code>boolean</code>
