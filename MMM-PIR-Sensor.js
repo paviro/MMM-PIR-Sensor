@@ -26,13 +26,15 @@ Module.register('MMM-PIR-Sensor', {
 
 	// Override socket notification handler.
 	socketNotificationReceived: function (notification, payload) {
-		if (notification === 'USER_PRESENCE'){
+		if (notification === 'USER_PRESENCE') {
+			this.sendNotification(notification, payload)
+		} else if (notification === 'SHOW_ALERT') {
 			this.sendNotification(notification, payload)
 		}
 	},
 
 	notificationReceived: function (notification, payload) {
-		if (notification === 'SCREEN_WAKEUP'){
+		if (notification === 'SCREEN_WAKEUP') {
 			this.sendNotification(notification, payload)
 		}
 	},

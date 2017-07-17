@@ -18,7 +18,8 @@ module.exports = NodeHelper.create({
 
     activateMonitor: function () {
         // If always-off is enabled, keep monitor deactivated
-        if (this.alwaysOff.readSync() === this.config.alwaysOffState) {
+        let alwaysOffTrigger = this.alwaysOff && (this.alwaysOff.readSync() === this.config.alwaysOffState)
+        if (alwaysOffTrigger) {
             return;
         }
         // If relays are being used in place of HDMI
@@ -36,7 +37,8 @@ module.exports = NodeHelper.create({
 
     deactivateMonitor: function () {
         // If always-on is enabled, keep monitor activated
-        if (this.alwaysOn.readSync() === this.config.alwaysOnState) {
+        let alwaysOnTrigger = this.alwaysOn && (this.alwaysOn.readSync() === this.config.alwaysOnState)
+        if (alwaysOnTrigger) {
             return;
         }
         // If relays are being used in place of HDMI
@@ -64,21 +66,24 @@ module.exports = NodeHelper.create({
             // Setup for alwaysOn switch
             if (this.config.alwaysOnPin) {
                 this.alwaysOn = new Gpio(this.config.alwaysOnPin, 'in', 'both');
+                const alwaysOnState = this.config.alwaysOnState
                 this.alwaysOn.watch(function (err, value) {
-                    if (value === this.config.alwaysOnState) {
+                    if (value === alwaysOnState) {
                         self.sendSocketNotification('ALWAYS_ON', true);
-                        self.sendNotification('SHOW_ALERT', {
+                        self.sendSocketNotification('SHOW_ALERT', {
                             title: 'Always-On Activated',
-                            message: 'Mirror will not activate power-saving mode'
+                            message: 'Mirror will not activate power-saving mode',
+                            timer: 4000
                         });
                         if (self.config.powerSaving){
                             clearTimeout(self.deactivateMonitorTimeout);
                         }
-                    } else if (value === (this.config.alwaysOnState + 1) % 2) {
+                    } else if (value === (alwaysOnState + 1) % 2) {
                         self.sendSocketNotification('ALWAYS_ON', false);
-                        self.sendNotification('SHOW_ALERT', {
+                        self.sendSocketNotification('SHOW_ALERT', {
                             title: 'Always-On Deactivated',
-                            message: 'Mirror will now use motion sensor to activate'
+                            message: 'Mirror will now use motion sensor to activate',
+                            timer: 4000
                         });
                     }
                 })
@@ -87,11 +92,12 @@ module.exports = NodeHelper.create({
             // Setup for alwaysOff switch
             if (this.config.alwaysOffPin) {
                 this.alwaysOff = new Gpio(this.config.alwaysOffPin, 'in', 'both');
+                const alwaysOffState = this.config.alwaysOffState
                 this.alwaysOff.watch(function (err, value) {
-                    if (value === this.config.alwaysOffState) {
+                    if (value === alwaysOffState) {
                         self.sendSocketNotification('ALWAYS_OFF', true);
                         self.deactivateMonitor();
-                    } else if (value === (this.config.alwaysOffState + 1) % 2) {
+                    } else if (value === (alwaysOffState + 1) % 2) {
                         self.sendSocketNotification('ALWAYS_OFF', false);
                         self.activateMonitor();
                         if (self.config.powerSaving){
