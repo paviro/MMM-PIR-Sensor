@@ -38,7 +38,8 @@ module.exports = NodeHelper.create({
     deactivateMonitor: function () {
         // If always-on is enabled, keep monitor activated
         let alwaysOnTrigger = this.alwaysOn && (this.alwaysOn.readSync() === this.config.alwaysOnState)
-        if (alwaysOnTrigger) {
+        let alwaysOffTrigger = this.alwaysOff && (this.alwaysOff.readSync() === this.config.alwaysOffState)
+        if (alwaysOnTrigger && !alwaysOffTrigger) {
             return;
         }
         // If relays are being used in place of HDMI
