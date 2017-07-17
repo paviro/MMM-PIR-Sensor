@@ -12,22 +12,14 @@ Module.register('MMM-PIR-Sensor', {
 	requiresVersion: '2.1.0',
 
 	defaults: {
-		sensor: {
-			pin: 22,
-			activeState: 1
-		},
-		relay: {
-			pin: false,
-			activeState: 1
-		},
-		alwaysOn: {
-			pin: false,
-			activeState: 1
-		},
-		alwaysOff: {
-			pin: false,
-			activeState: 1
-		}
+		sensorPin: 22,
+		sensorState: 1,
+		relayPin: false,
+		relayState: 1,
+		alwaysOnPin: false,
+		alwaysOnState: 1,
+		alwaysOffPin: false,
+		alwaysOffState: 1,
 		powerSaving: true,
 		powerSavingDelay: 0,
 	},
