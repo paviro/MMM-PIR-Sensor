@@ -20,6 +20,12 @@ module.exports = NodeHelper.create({
     if (this.config.relayPIN != false) {
       this.relay.writeSync(this.config.relayOnState);
     }
+    else if (this.config.useOfficialTouchscreen != false) {
+      // Max brightness is 255, lower is generally better for a mirror to
+      // avoid light bleed.
+      brightness = this.config.officialTouchscreenBrightness
+      exec("sudo sh -c \"echo " + brightness + " > /sys/class/backlight/rpi_backlight/brightness\"")
+    }
     else if (this.config.relayPIN == false){
       // Check if hdmi output is already on
       exec("/usr/bin/vcgencmd display_power").stdout.on('data', function(data) {
@@ -32,6 +38,10 @@ module.exports = NodeHelper.create({
   deactivateMonitor: function () {
     if (this.config.relayPIN != false) {
       this.relay.writeSync(this.config.relayOffState);
+    }
+    else if (this.config.useOfficialTouchscreen != false) {
+      // Brightness of 0 makes it look like the display is off.
+      exec("sudo sh -c \"echo 0 > /sys/class/backlight/rpi_backlight/brightness\"")
     }
     else if (this.config.relayPIN == false){
       exec("/usr/bin/vcgencmd display_power 0", null);

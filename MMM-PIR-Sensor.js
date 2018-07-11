@@ -16,8 +16,10 @@ Module.register('MMM-PIR-Sensor',{
 		invertSensorValue: false,
 		relayPIN: false,
 		relayOnState: 1,
-		powerSaving: true,
+    powerSaving: true,
 		powerSavingDelay: 0,
+		useOfficialTouchscreen: false,
+		officialTouchscreenBrightness: 50
 	},
 
 	// Override socket notification handler.
@@ -40,6 +42,11 @@ Module.register('MMM-PIR-Sensor',{
 		else if (this.config.relayOnState == 0){
 			this.config.relayOffState = 1
 		}
+
+		if (this.config.officialTouchscreenBrightness > 255) {
+			this.config.officialTouchscreenBrightness = 255
+		}
+
 		this.sendSocketNotification('CONFIG', this.config);
 		Log.info('Starting module: ' + this.name);
 	}
