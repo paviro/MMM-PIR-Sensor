@@ -7,6 +7,7 @@
  * MIT Licensed.
  */
 
+
 Module.register('MMM-PIR-Sensor',{
 
 	requiresVersion: "2.1.0",
@@ -18,12 +19,17 @@ Module.register('MMM-PIR-Sensor',{
 		relayOnState: 1,
 		powerSaving: true,
 		powerSavingDelay: 0,
+		powerSavingNotification: false,
+		powerSavingMessage: "Monitor will be turn Off by PIR module", 
 	},
 
 	// Override socket notification handler.
 	socketNotificationReceived: function(notification, payload) {
 		if (notification === "USER_PRESENCE"){
 			this.sendNotification(notification, payload)
+		        if (payload === false && this.config.powerSavingNotification === true){
+				this.sendNotification("SHOW_ALERT",{type:"notification", message:this.config.powerSavingMessage});
+			}
 		}
 	},
 
