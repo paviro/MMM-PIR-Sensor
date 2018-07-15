@@ -109,6 +109,20 @@ The following properties can be configured:
 				<br><b>Default value:</b> <code>1</code>
 			</td>
 		</tr>
+		<tr>
+			<td><code>powerSavingNotification</code></td>
+			<td>To display a notification before to switch screen off<br>
+				<br><b>Possible values:</b> <code>boolean</code>
+				<br><b>Default value:</b> <code>false</code>
+				<br><b>Note:</b> Need the default module "alert" to be declared on config.js file.
+			</td>
+		</tr>
+		<tr>
+			<td><code>powerSavingMessage</code></td>
+			<td>Message notification to display before to switch screen off<br>
+				<br><b>Default value:</b> <code>"Monitor will be turn Off by PIR module"</code>
+			</td>
+		</tr>
 	</tbody>
 </table>
 
