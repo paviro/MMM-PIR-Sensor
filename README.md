@@ -22,10 +22,9 @@ modules: [
 ]
 ````
 
-## Configuration options
+## Configuration Options
 
 The following properties can be configured:
-
 
 <table width="100%">
 	<!-- why, markdown... -->
@@ -37,7 +36,7 @@ The following properties can be configured:
 	<thead>
 	<tbody>
 		<tr>
-			<td><code>sensorPIN</code></td>
+			<td><code>sensorPin</code></td>
 			<td>The pin your PIR-sensor is connected to.<br>
 				<br><b>Possible values:</b> <code>int</code>
 				<br><b>Default value:</b> <code>22</code>
@@ -45,10 +44,10 @@ The following properties can be configured:
 			</td>
 		</tr>
 		<tr>
-			<td><code>invertSensorValue</code></td>
-			<td>Invert the sensor value on the given sensorPIN. 1 -> no pressence, 0 -> presence detected<br>
-				<br><b>Possible values:</b> <code>boolean</code>
-				<br><b>Default value:</b> <code>false</code>
+			<td><code>sensorState</code></td>
+			<td>Invert the GPIO-state that triggers user presence. For example, a <code>0</code> value would tell the mirror to trigger user presence when the GPIO pin receives <code>0</code> value.<br>
+				<br><b>Possible values:</b> <code>int (0 or 1)</code>
+				<br><b>Default value:</b> <code>1</code>
 			</td>
 		</tr>
 		<tr>
@@ -66,17 +65,47 @@ The following properties can be configured:
 			</td>
 		</tr>
 		<tr>
-			<td><code>relayPIN</code></td>
+			<td><code>relayPin</code></td>
 			<td>If you want to use a relay to turn of the mirror provide the pin here. If no pin is provided HDMI is turned off instead.<br>
 				<br><b>Possible values:</b> <code>int</code>
-				<br><b>Default value:</b> <code>none</code>
+				<br><b>Default value:</b> <code>false</code>
 				<br><b>Note:</b> Please use BCM-numbering.
 			</td>
 		</tr>
 		<tr>
-			<td><code>relayOnState</code></td>
+			<td><code>relayState</code></td>
 			<td>GPIO-state your relay is turned on.<br>
+				<br><b>Possible values:</b> <code>int (0 or 1)</code>
+				<br><b>Default value:</b> <code>1</code>
+			</td>
+		</tr>
+		<tr>
+			<td><code>alwaysOnPin</code></td>
+			<td>If you would like to use a GPIO pin to trigger power-saving mode. Ideal for users who want to have a physical switch that controls whether or not to use the motion sensor.<br>
 				<br><b>Possible values:</b> <code>int</code>
+				<br><b>Default value:</b> <code>false</code>
+				<br><b>Note:</b> Please use BCM-numbering.
+			</td>
+		</tr>
+		<tr>
+			<td><code>alwaysOnState</code></td>
+			<td>GPIO-state to trigger always-on.<br>
+				<br><b>Possible values:</b> <code>int (0 or 1)</code>
+				<br><b>Default value:</b> <code>1</code>
+			</td>
+		</tr>
+		<tr>
+			<td><code>alwaysOffPin</code></td>
+			<td>If you would like to use a GPIO pin to trigger sleep mode. Ideal for users who want to have a physical switch to shut off the screen (perhaps the mirror is too bright at night).<br>
+				<br><b>Possible values:</b> <code>int</code>
+				<br><b>Default value:</b> <code>false</code>
+				<br><b>Note:</b> Please use BCM-numbering.
+			</td>
+		</tr>
+		<tr>
+			<td><code>alwaysOffState</code></td>
+			<td>GPIO-state to trigger always-off.<br>
+				<br><b>Possible values:</b> <code>int (0 or 1)</code>
 				<br><b>Default value:</b> <code>1</code>
 			</td>
 		</tr>
