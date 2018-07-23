@@ -28,11 +28,11 @@ Module.register('MMM-PIR-Sensor',{
 	socketNotificationReceived: function (notification, payload) {
 		if (notification === 'USER_PRESENCE') {
 			this.sendNotification(notification, payload)
-		} else if (notification === 'SHOW_ALERT') {
-			this.sendNotification(notification, payload)
-		        if (payload === false && this.config.powerSavingNotification === true){
+			if (payload === false && this.config.powerSavingNotification === true){
 				this.sendNotification("SHOW_ALERT",{type:"notification", message:this.config.powerSavingMessage});
 			}
+		} else if (notification === 'SHOW_ALERT') {
+			this.sendNotification(notification, payload)
 		}
 	},
 
