@@ -45,5 +45,7 @@ Module.register('MMM-PIR-Sensor',{
 	start: function () {
 		this.sendSocketNotification('CONFIG', this.config);
 		Log.info('Starting module: ' + this.name);
+		this.sendSocketNotification('SCREEN_WAKEUP', null); //to start the screen at start-up, in case it was off before (otherwise it was staying off...)
+
 	}
 });
