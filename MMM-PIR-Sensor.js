@@ -27,11 +27,13 @@ Module.register('MMM-PIR-Sensor',{
 	// Override socket notification handler.
 	socketNotificationReceived: function (notification, payload) {
 		if (notification === 'USER_PRESENCE') {
-			this.sendNotification(notification, payload)
+			this.sendNotification(notification, payload);
 			if (payload === false && this.config.powerSavingNotification === true){
 				this.sendNotification("SHOW_ALERT",{type:"notification", message:this.config.powerSavingMessage});
 			}
 		} else if (notification === 'SHOW_ALERT') {
+			this.sendNotification(notification, payload)
+		} else if (notification === 'POWER_SAVE') {
 			this.sendNotification(notification, payload)
 		}
 	},
