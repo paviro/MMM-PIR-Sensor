@@ -34,13 +34,19 @@ Module.register('MMM-PIR-Sensor',{
 			}
 
 			if(this.config.suspendResume) {
+				self = this;
+
 				// Suspend all modules
 				MM.getModules().enumerate((module) => {
 					if(!module.hidden) {
 						if(payload) { // User present
+							clearTimeout(self.suspendTimeout);
 							module.resume();
 						} else { // User not present
-							module.suspend();
+							setTimeout(function() {
+								console.log(module);
+								module.suspend();
+							}, self.config.powerSavingDelay * 1000);
 						}
 					}
 				});
