@@ -10,6 +10,7 @@
 const NodeHelper = require('node_helper');
 const Gpio = require('onoff').Gpio;
 const exec = require('child_process').exec;
+const execSync = require('child_process').execSync;
 
 module.exports = NodeHelper.create({
     start: function () {
@@ -23,28 +24,34 @@ module.exports = NodeHelper.create({
         if (alwaysOffTrigger) {
             return;
         }
-
-        // If relays are being used
-        if (self.config.relayPin !== false) {
-            // check if a switch on is already scheduled
-            if(self.relayOnTimeout === undefined) {
-                self.relayOnTimeout = setTimeout(function() {
-                    self.relay.writeSync(self.config.relayState);
-                    self.relayOnTimeout = undefined;
-                }, self.config.relayOnDelay);
-            }
-        }
         
         if (self.config.switchHDMI === true) {
             // cancle any scheduled off events
             if(self.hdmiOffTimeout !== undefined) {
                 clearTimeout(self.hdmiOffTimeout);
             }
+            
             // Check if hdmi output is already on
-            exec("/usr/bin/vcgencmd display_power").stdout.on('data', function(data) {
-                if (data.indexOf("display_power=0") === 0)
-                    exec("/usr/bin/vcgencmd display_power 1", null);
-            });
+            let displayOff = execSync("/usr/bin/vcgencmd display_power").indexOf("display_power=0") === 0
+            if (displayOff){
+                exec("/usr/bin/vcgencmd display_power 1", null);
+            }
+
+            let switchOnDelay = displayOff ? self.config.relayOnDelay : 0;
+
+            // If relays are being used
+            if (self.config.relayPin !== false) {
+                // check if a switch on is already scheduled
+                if(self.relayOnTimeout === undefined) {
+                    self.relayOnTimeout = setTimeout(function() {
+                        self.relay.writeSync(self.config.relayState);
+                        self.relayOnTimeout = undefined;
+                    }, switchOnDelay);
+                }
+            }
+        } else {
+            //switch the relay immediately
+            self.relay.writeSync(self.config.relayState);
         }
     },
 

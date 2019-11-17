@@ -81,7 +81,7 @@ The following properties can be configured:
 		</tr>
 		<tr>
 			<td><code>relayOnDelay</code></td>
-			<td>Delay before switching on the relay after motion was detected.<br>
+			<td>Delay before switching on the relay after motion was detected. This delay is only applied when the monitor was switched off via HDMI before.<br>
 				<br><b>Possible values:</b> <code>int (ms)</code>
 				<br><b>Default value:</b> <code>0</code>
 			</td>
