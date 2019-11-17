@@ -22,12 +22,23 @@ module.exports = NodeHelper.create({
         if (alwaysOffTrigger) {
             return;
         }
-        // If relays are being used in place of HDMI
+
+        // If relays are being used
         if (this.config.relayPin !== false) {
-            this.relay.writeSync(this.config.relayState);
+            // check if a switch on is already scheduled
+            if(this.relayOnTimeout === undefined) {
+                this.relayOnTimeout = setTimeout(function() {
+                    this.relay.writeSync(this.config.relayState);
+                    this.relayOnTimeout = undefined;
+                }, this.config.relayOnDelay);
+            }
         }
         
         if (this.config.switchHDMI === true) {
+            // cancle any scheduled off events
+            if(this.hdmiOffTimeout !== undefined) {
+                clearTimeout(this.hdmiOffTimeout);
+            }
             // Check if hdmi output is already on
             exec("/usr/bin/vcgencmd display_power").stdout.on('data', function(data) {
                 if (data.indexOf("display_power=0") === 0)
@@ -45,11 +56,22 @@ module.exports = NodeHelper.create({
         }
         // If relays are being used in place of HDMI
         if (this.config.relayPin !== false) {
+            // cancel any scheduled turn-on events
+            if(this.relayOnTimeout !== undefined) {
+                clearTimeout(this.relayOnTimeout);
+            }
+
             this.relay.writeSync((this.config.relayState + 1) % 2);
         }
-        
+
         if (this.config.switchHDMI === true) {
-            exec("/usr/bin/vcgencmd display_power 0", null);
+            // check if a switch off is already scheduled
+            if(this.hdmiOffTimeout === undefined) {
+                this.hdmiOffTimeout = setTimeout(function() {
+                    exec("/usr/bin/vcgencmd display_power 0", null);
+                    this.hdmiOffTimeout = undefined;
+                }, this.config.hdmiOffDelay);
+            }
         }
     },
 

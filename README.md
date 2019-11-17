@@ -80,6 +80,20 @@ The following properties can be configured:
 			</td>
 		</tr>
 		<tr>
+			<td><code>relayOnDelay</code></td>
+			<td>Delay before switching on the relay after motion was detected.<br>
+				<br><b>Possible values:</b> <code>int (ms)</code>
+				<br><b>Default value:</b> <code>0</code>
+			</td>
+		</tr>
+		<tr>
+			<td><code>hdmiOffDelay</code></td>
+			<td>Delay before switching off the monitor via HDMI after no motion was detected.<br>
+				<br><b>Possible values:</b> <code>int (ms)</code>
+				<br><b>Default value:</b> <code>0</code>
+			</td>
+		</tr>
+		<tr>
 			<td><code>relayState</code></td>
 			<td>GPIO-state your relay is turned on.<br>
 				<br><b>Possible values:</b> <code>int (0 or 1)</code>
