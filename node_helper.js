@@ -17,27 +17,28 @@ module.exports = NodeHelper.create({
     },
 
     activateMonitor: function () {
+        let self = this;
         // If always-off is enabled, keep monitor deactivated
-        let alwaysOffTrigger = this.alwaysOff && (this.alwaysOff.readSync() === this.config.alwaysOffState)
+        let alwaysOffTrigger = self.alwaysOff && (self.alwaysOff.readSync() === self.config.alwaysOffState)
         if (alwaysOffTrigger) {
             return;
         }
 
         // If relays are being used
-        if (this.config.relayPin !== false) {
+        if (self.config.relayPin !== false) {
             // check if a switch on is already scheduled
-            if(this.relayOnTimeout === undefined) {
-                this.relayOnTimeout = setTimeout(function() {
-                    this.relay.writeSync(this.config.relayState);
-                    this.relayOnTimeout = undefined;
-                }, this.config.relayOnDelay);
+            if(self.relayOnTimeout === undefined) {
+                self.relayOnTimeout = setTimeout(function() {
+                    self.relay.writeSync(self.config.relayState);
+                    self.relayOnTimeout = undefined;
+                }, self.config.relayOnDelay);
             }
         }
         
-        if (this.config.switchHDMI === true) {
+        if (self.config.switchHDMI === true) {
             // cancle any scheduled off events
-            if(this.hdmiOffTimeout !== undefined) {
-                clearTimeout(this.hdmiOffTimeout);
+            if(self.hdmiOffTimeout !== undefined) {
+                clearTimeout(self.hdmiOffTimeout);
             }
             // Check if hdmi output is already on
             exec("/usr/bin/vcgencmd display_power").stdout.on('data', function(data) {
@@ -48,29 +49,30 @@ module.exports = NodeHelper.create({
     },
 
     deactivateMonitor: function () {
+        let self = this;
         // If always-on is enabled, keep monitor activated
-        let alwaysOnTrigger = this.alwaysOn && (this.alwaysOn.readSync() === this.config.alwaysOnState)
-        let alwaysOffTrigger = this.alwaysOff && (this.alwaysOff.readSync() === this.config.alwaysOffState)
+        let alwaysOnTrigger = self.alwaysOn && (self.alwaysOn.readSync() === self.config.alwaysOnState)
+        let alwaysOffTrigger = self.alwaysOff && (self.alwaysOff.readSync() === self.config.alwaysOffState)
         if (alwaysOnTrigger && !alwaysOffTrigger) {
             return;
         }
         // If relays are being used in place of HDMI
-        if (this.config.relayPin !== false) {
+        if (self.config.relayPin !== false) {
             // cancel any scheduled turn-on events
-            if(this.relayOnTimeout !== undefined) {
-                clearTimeout(this.relayOnTimeout);
+            if(self.relayOnTimeout !== undefined) {
+                clearTimeout(self.relayOnTimeout);
             }
 
-            this.relay.writeSync((this.config.relayState + 1) % 2);
+            self.relay.writeSync((self.config.relayState + 1) % 2);
         }
 
-        if (this.config.switchHDMI === true) {
+        if (self.config.switchHDMI === true) {
             // check if a switch off is already scheduled
-            if(this.hdmiOffTimeout === undefined) {
-                this.hdmiOffTimeout = setTimeout(function() {
+            if(self.hdmiOffTimeout === undefined) {
+                self.hdmiOffTimeout = setTimeout(function() {
                     exec("/usr/bin/vcgencmd display_power 0", null);
-                    this.hdmiOffTimeout = undefined;
-                }, this.config.hdmiOffDelay);
+                    self.hdmiOffTimeout = undefined;
+                }, self.config.hdmiOffDelay);
             }
         }
     },
