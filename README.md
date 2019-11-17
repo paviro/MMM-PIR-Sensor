@@ -66,10 +66,17 @@ The following properties can be configured:
 		</tr>
 		<tr>
 			<td><code>relayPin</code></td>
-			<td>If you want to use a relay to turn of the mirror provide the pin here. If no pin is provided HDMI is turned off instead.<br>
+			<td>If you want to use a relay to turn of the mirror provide the pin here.<br>
 				<br><b>Possible values:</b> <code>int</code>
 				<br><b>Default value:</b> <code>false</code>
 				<br><b>Note:</b> Please use BCM-numbering.
+			</td>
+		</tr>
+		<tr>
+			<td><code>switchHDMI</code></td>
+			<td>If you want to use HDMI to turn the monitor on and off.<br>
+				<br><b>Possible values:</b> <code>boolean</code>
+				<br><b>Default value:</b> <code>true</code>
 			</td>
 		</tr>
 		<tr>

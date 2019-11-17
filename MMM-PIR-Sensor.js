@@ -13,6 +13,7 @@ Module.register('MMM-PIR-Sensor',{
 		sensorPin: 22,
 		sensorState: 1,
 		relayPin: false,
+		switchHDMI: true,
 		relayState: 1,
 		alwaysOnPin: false,
 		alwaysOnState: 1,

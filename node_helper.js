@@ -26,7 +26,8 @@ module.exports = NodeHelper.create({
         if (this.config.relayPin !== false) {
             this.relay.writeSync(this.config.relayState);
         }
-        else if (this.config.relayPin === false) {
+        
+        if (this.config.switchHDMI === true) {
             // Check if hdmi output is already on
             exec("/usr/bin/vcgencmd display_power").stdout.on('data', function(data) {
                 if (data.indexOf("display_power=0") === 0)
@@ -46,7 +47,8 @@ module.exports = NodeHelper.create({
         if (this.config.relayPin !== false) {
             this.relay.writeSync((this.config.relayState + 1) % 2);
         }
-        else if (this.config.relayPin === false) {
+        
+        if (this.config.switchHDMI === true) {
             exec("/usr/bin/vcgencmd display_power 0", null);
         }
     },
