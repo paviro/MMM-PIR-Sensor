@@ -29,6 +29,7 @@ module.exports = NodeHelper.create({
             // cancle any scheduled off events
             if(self.hdmiOffTimeout !== undefined) {
                 clearTimeout(self.hdmiOffTimeout);
+                self.hdmiOffTimeout = undefined;
             }
             
             // Check if hdmi output is already on
@@ -68,6 +69,7 @@ module.exports = NodeHelper.create({
             // cancel any scheduled turn-on events
             if(self.relayOnTimeout !== undefined) {
                 clearTimeout(self.relayOnTimeout);
+                self.relayOnTimeout = undefined;
             }
 
             self.relay.writeSync((self.config.relayState + 1) % 2);
