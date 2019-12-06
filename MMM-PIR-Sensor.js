@@ -22,6 +22,8 @@ Module.register('MMM-PIR-Sensor',{
 		powerSavingDelay: 0,
 		powerSavingNotification: false,
 		powerSavingMessage: "Monitor will be turn Off by PIR module", 
+                notBeforeHour: null,
+                notAfterHour:  null
 	},
 
 	// Override socket notification handler.

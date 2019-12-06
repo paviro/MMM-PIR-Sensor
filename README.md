@@ -123,6 +123,22 @@ The following properties can be configured:
 				<br><b>Default value:</b> <code>"Monitor will be turn Off by PIR module"</code>
 			</td>
 		</tr>
+                <tr>
+                        <td><code>notBeforeHour</code></td>
+                        <td>Time duration, before the screen should be stay turned off.<br>
+                                <br><b>Possible values:</b> <code>0-23</code>
+                                <br><b>Default value:</b> <code>null</code>
+                                <br><b>Note:</b>Useful if the screen only should turn on between an timerange. Must set with <code>notAfterHour</code> 
+                        </td>
+                </tr>
+                <tr>
+                        <td><code>notAfterHour</code></td>
+                        <td>Time duration, after the screen should be stay turned off.<br>
+                                <br><b>Possible values:</b> <code>0-23</code>
+                                <br><b>Default value:</b> <code>null</code>
+                                br><b>Note:</b>Useful if the screen only should turn on between an timerange. Must set with <code>notAfterHour</code>
+                        </td>
+                </tr>
 	</tbody>
 </table>
 
