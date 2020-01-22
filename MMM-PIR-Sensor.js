@@ -38,7 +38,7 @@ Module.register('MMM-PIR-Sensor',{
 
 	notificationReceived: function (notification, payload) {
 		if (notification === 'SCREEN_WAKEUP') {
-			this.sendNotification(notification, payload)
+			this.sendSocketNotification(notification, payload)
 		}
 	},
 

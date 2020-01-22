@@ -77,7 +77,7 @@ module.exports = NodeHelper.create({
                             timer: 4000
                         });
                         if (self.config.powerSaving){
-                            clearTimeout(self.deactivateMonitorTimeout);
+                            self.clearMonitorTimeout();
                         }
                     } else if (value === (alwaysOnState + 1) % 2) {
                         self.sendSocketNotification('ALWAYS_ON', false);
@@ -102,7 +102,7 @@ module.exports = NodeHelper.create({
                         self.sendSocketNotification('ALWAYS_OFF', false);
                         self.activateMonitor();
                         if (self.config.powerSaving){
-                            clearTimeout(self.deactivateMonitorTimeout);
+                            self.clearMonitorTimeout();
                         }
                     }
                 })
@@ -120,7 +120,7 @@ module.exports = NodeHelper.create({
                 if (value == valueOn) {
                     self.sendSocketNotification('USER_PRESENCE', true);
                     if (self.config.powerSaving){
-                        clearTimeout(self.deactivateMonitorTimeout);
+                        self.clearMonitorTimeout();
                         self.activateMonitor();
                     }
                 }
@@ -130,17 +130,28 @@ module.exports = NodeHelper.create({
                         return;
                     }
 
-                    self.deactivateMonitorTimeout = setTimeout(function() {
-                        self.deactivateMonitor();
-                    }, self.config.powerSavingDelay * 1000);
+                    self.setMonitorTimeout();
                 }
             });
 
             this.started = true;
 
         } else if (notification === 'SCREEN_WAKEUP') {
+            console.log('MMM-PIR-Sensor node_helper: SCREEN_WAKEUP notification received');
             this.activateMonitor();
+            this.setMonitorTimeout();
         }
+    },
+    clearMonitorTimeout: function() {
+        console.log('MMM-PIR-Sensor: clearing monitor timeout if set');
+        if (this.deactivateMonitorTimeout) {
+            clearTimeout(this.deactivateMonitorTimeout);
+        }
+    },
+    setMonitorTimeout: function() {
+        const timeout = this.config.powerSavingDelay * 1000;
+        console.log('MMM-PIR-Sensor: setting monitor timeout to ' + timeout);
+        this.deactivateMonitorTimeout = setTimeout(this.deactivateMonitor, timeout);
     }
 
 });
