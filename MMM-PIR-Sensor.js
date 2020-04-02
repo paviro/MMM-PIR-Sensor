@@ -24,10 +24,13 @@ Module.register('MMM-PIR-Sensor',{
 		powerSavingMessage: "Monitor will be turn Off by PIR module",
 		suspendResume: true
 	},
+	user_present: false,
 
 	// Override socket notification handler.
 	socketNotificationReceived: function (notification, payload) {
 		if (notification === 'USER_PRESENCE') {
+			this.user_present = payload;
+
 			this.sendNotification(notification, payload)
 			if (payload === false && this.config.powerSavingNotification === true){
 				this.sendNotification("SHOW_ALERT",{type:"notification", message:this.config.powerSavingMessage});
@@ -51,6 +54,8 @@ Module.register('MMM-PIR-Sensor',{
 					}
 				});
 			}
+
+			this.updateDom();
 		} else if (notification === 'SHOW_ALERT') {
 			this.sendNotification(notification, payload)
 		}
@@ -65,5 +70,17 @@ Module.register('MMM-PIR-Sensor',{
 	start: function () {
 		this.sendSocketNotification('CONFIG', this.config);
 		Log.info('Starting module: ' + this.name);
-	}
+	},
+
+	getDom: function() {
+		var wrapper;
+		wrapper = document.createElement("div");
+		wrapper.className = "small";
+		wrapper.style = "border-radius: 50%; border: 3px solid white; width: 25px; height: 25px; display: inline-block";
+		if(this.user_present) {
+			wrapper.style.backgroundColor = "white";
+		}
+		return wrapper;
+	},
+
 });
