@@ -141,10 +141,17 @@ The following properties can be configured:
                 </tr>
                 <tr>
 			<td><code>preventHDMITimeout</code></td>
-			<td>Time, in minutes, after which- while HDMI is off- the screen will be briefly turned on and off again, periodically. This is to avoid older HDMI screens from automatically turning Off due to "No Signal".
-			<br><b>Possible values:</b> <code>0-10</code>
-			<br><b>Default value:</b> <code>0</code>
-			<br><b>Note:</b>0 value means that this feature is turned off.
+			<td>When <code>powerSaving</code> is On: time, in minutes, after which- while HDMI is off- the screen will be briefly turned on and off again, periodically. This is to avoid older HDMI screens from automatically turning Off due to "No Signal".
+				<br><b>Possible values:</b> <code>0-10</code>
+				<br><b>Default value:</b> <code>0</code>
+				<br><b>Note:</b>0 value means that this feature is turned off.
+			</td>
+		</tr>    
+               <tr>
+			<td><code>supportCEC</code></td>
+		        <td>When <code>powerSaving</code> is On: support CEC to turn monitor ON or OFF as well, not just the HDMI circuit in the RPI.
+				<br><b>Possible values:</b> <code>boolean</code>
+				<br><b>Default value:</b> <code>false</code>
 			</td>
 		</tr>    
 	</tbody>
