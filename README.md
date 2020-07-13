@@ -139,6 +139,14 @@ The following properties can be configured:
                                 br><b>Note:</b>Useful if the screen only should turn on between an timerange. Must set with <code>notAfterHour</code>
                         </td>
                 </tr>
+                <tr>
+			<td><code>preventHDMITimeout</code></td>
+			<td>Time, in minutes, after which- while HDMI is off- the screen will be briefly turned on and off again, periodically. This is to avoid older HDMI screens from automatically turning Off due to "No Signal".
+			<br><b>Possible values:</b> <code>0-10</code>
+			<br><b>Default value:</b> <code>0</code>
+			<br><b>Note:</b>0 value means that this feature is turned off.
+			</td>
+		</tr>    
 	</tbody>
 </table>
 
