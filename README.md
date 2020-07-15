@@ -123,23 +123,6 @@ The following properties can be configured:
 				<br><b>Default value:</b> <code>"Monitor will be turn Off by PIR module"</code>
 			</td>
 		</tr>
-                <tr>
-                        <td><code>notBeforeHour</code></td>
-                        <td>Time duration, before the screen should be stay turned off.<br>
-                                <br><b>Possible values:</b> <code>0-23</code>
-                                <br><b>Default value:</b> <code>null</code>
-                                <br><b>Note:</b>Useful if the screen only should turn on between an timerange. Must set with <code>notAfterHour</code> 
-                        </td>
-                </tr>
-                <tr>
-                        <td><code>notAfterHour</code></td>
-                        <td>Time duration, after the screen should be stay turned off.<br>
-                                <br><b>Possible values:</b> <code>0-23</code>
-                                <br><b>Default value:</b> <code>null</code>
-                                br><b>Note:</b>Useful if the screen only should turn on between an timerange. Must set with <code>notAfterHour</code>
-                        </td>
-                </tr>
-                <tr>
 			<td><code>preventHDMITimeout</code></td>
 			<td>When <code>powerSaving</code> is On: time, in minutes, after which- while HDMI is off- the screen will be briefly turned on and off again, periodically. This is to avoid older HDMI screens from automatically turning Off due to "No Signal".
 				<br><b>Possible values:</b> <code>0-10</code>
@@ -147,7 +130,7 @@ The following properties can be configured:
 				<br><b>Note:</b>0 value means that this feature is turned off.
 			</td>
 		</tr>    
-               <tr>
+    <tr>
 			<td><code>supportCEC</code></td>
 		        <td>When <code>powerSaving</code> is On: support CEC to turn monitor ON or OFF as well, not just the HDMI circuit in the RPI.
 				<br><b>Possible values:</b> <code>boolean</code>
