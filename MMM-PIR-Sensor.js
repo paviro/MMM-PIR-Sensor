@@ -21,7 +21,8 @@ Module.register('MMM-PIR-Sensor',{
 		powerSaving: true,
 		powerSavingDelay: 0,
 		powerSavingNotification: false,
-		powerSavingMessage: "Monitor will be turn Off by PIR module", 
+		powerSavingMessage: "Monitor will be turn Off by PIR module",
+		suspendResume: true
 	},
 
 	// Override socket notification handler.
@@ -30,6 +31,25 @@ Module.register('MMM-PIR-Sensor',{
 			this.sendNotification(notification, payload)
 			if (payload === false && this.config.powerSavingNotification === true){
 				this.sendNotification("SHOW_ALERT",{type:"notification", message:this.config.powerSavingMessage});
+			}
+
+			if(this.config.suspendResume) {
+				self = this;
+
+				// Suspend all modules
+				MM.getModules().enumerate((module) => {
+					if(!module.hidden) {
+						if(payload) { // User present
+							clearTimeout(self.suspendTimeout);
+							module.resume();
+						} else { // User not present
+							setTimeout(function() {
+								console.log(module);
+								module.suspend();
+							}, self.config.powerSavingDelay * 1000);
+						}
+					}
+				});
 			}
 		} else if (notification === 'SHOW_ALERT') {
 			this.sendNotification(notification, payload)

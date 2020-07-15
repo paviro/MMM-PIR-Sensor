@@ -123,6 +123,13 @@ The following properties can be configured:
 				<br><b>Default value:</b> <code>"Monitor will be turn Off by PIR module"</code>
 			</td>
 		</tr>
+		<tr>
+			<td><code>suspendResume</code></td>
+			<td>Suspend and resume all visible modules on user absence/presence.<br>
+				<br><b>Possible values:</b> <code>boolean</code>
+				<br><b>Default value:</b> <code>true</code>
+			</td>
+		</tr>
 	</tbody>
 </table>
 
