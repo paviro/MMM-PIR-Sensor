@@ -18,11 +18,6 @@ module.exports = NodeHelper.create({
 
     activateMonitor: function () {
         // If always-off is enabled, keep monitor deactivated
-        d = new Date();
-        h = d.getHours();
-        if(this.config.notAfterHour !== null && this.config.notBeforeHour !== null && (h >= this.config.notAfterHour || h <= this.config.notBeforeHour)){
-           return;
-        }
         let alwaysOffTrigger = this.alwaysOff && (this.alwaysOff.readSync() === this.config.alwaysOffState)
         if (alwaysOffTrigger) {
             return;
