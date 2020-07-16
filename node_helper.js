@@ -28,10 +28,19 @@ module.exports = NodeHelper.create({
         }
         else if (this.config.relayPin === false) {
             // Check if hdmi output is already on
+            const self = this;
             exec("/usr/bin/vcgencmd display_power").stdout.on('data', function(data) {
-                if (data.indexOf("display_power=0") === 0)
+		if (data.indexOf("display_power=0") === 0) {
                     exec("/usr/bin/vcgencmd display_power 1", null);
+	 	}
+ 	        if (self.config.supportCEC)
+    	            exec("echo 'on o' | cec-client -s -d 1");
             });
+        }
+	if (this.briefHDMIWakeupInterval) {
+	    clearInterval(this.briefHDMIWakeupInterval);
+	    clearTimeout(this.briefHDMIWakeupPhase2Timeout);
+	    this.briefHDMIWakeupInterval = null;
         }
     },
 
@@ -47,8 +56,30 @@ module.exports = NodeHelper.create({
             this.relay.writeSync((this.config.relayState + 1) % 2);
         }
         else if (this.config.relayPin === false) {
+	    if (this.config.supportCEC)
+	        exec("echo 'standby 0' | cec-client -s -d 1");
             exec("/usr/bin/vcgencmd display_power 0", null);
         }
+	if (this.config.preventHDMITimeout > 0 && this.config.preventHDMITimeout < 10) {
+            const self = this;
+	    self.briefHDMIWakeupInterval = setInterval(function() {
+                self.briefHDMIWakeup();
+        	}, self.config.preventHDMITimeout * 1000 * 60);
+	}
+    },
+
+    briefHDMIWakeup: function() {
+	const self = this
+        exec("/usr/bin/vcgencmd display_power").stdout.on('data', function(data) {
+            if (data.indexOf("display_power=0") === 0) {
+                exec("/usr/bin/vcgencmd display_power 1", null);
+
+                self.briefHDMIWakeupPhase2Timeout = setTimeout(function() { // set a short delay for the monitor to sense the input
+                    self.briefHDMIWakeupPhase2Timeout = null;
+                    exec("/usr/bin/vcgencmd display_power 0", null);
+                }, 1000);
+            }
+        });
     },
 
     // Subclass socketNotificationReceived received.
@@ -57,11 +88,19 @@ module.exports = NodeHelper.create({
             const self = this;
             this.config = payload;
 
+	    if (self.config.powerSaving) {
+                self.deactivateMonitorTimeout = setTimeout(function() { // Set the timeout before movement is identified
+                    self.deactivateMonitor();
+                }, self.config.powerSavingDelay * 1000);
+            }
+
             // Setup for relay pin
             if (this.config.relayPin) {
                 this.relay = new Gpio(this.config.relayPin, 'out');
                 this.relay.writeSync(this.config.relayState);
                 exec("/usr/bin/vcgencmd display_power 1", null);
+	        if (this.config.supportCEC)
+    	            exec("echo 'on o' | cec-client -s -d 1");
             }
 
             // Setup for alwaysOn switch
@@ -107,6 +146,11 @@ module.exports = NodeHelper.create({
                     }
                 })
             }
+	    else {
+                exec("/usr/bin/vcgencmd display_power 1", null);  // Mirror could have stopped with HDMI off. Reset at startup
+	        if (this.config.supportCEC)
+    	            exec("echo 'on o' | cec-client -s -d 1");
+	    }
 
             // Setup for sensor pin
             this.pir = new Gpio(this.config.sensorPin, 'in', 'both');
