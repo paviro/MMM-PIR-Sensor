@@ -61,9 +61,7 @@ Module.register('MMM-PIR-Sensor',{
 			if  (payload === false && this.config.powerSavingNotification === true){
 				this.sendNotification("SHOW_ALERT",{type:"notification", message:this.config.powerSavingMessage});
 			}
-			if (this.config.showIndicator) {
-				this.updateDom();
-			}
+			this.updateDom();
 		} else if (notification === 'SHOW_ALERT') {
 			this.sendNotification(notification, payload)
 		}
