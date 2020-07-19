@@ -25,7 +25,8 @@ Module.register('MMM-PIR-Sensor',{
 		presenceIndicator: "fa-bullseye",
 		presenceIndicatorColor: "red",
 		presenceOffIndicator: null,
-		presenceOffIndicatorColor: "dimgray"
+		presenceOffIndicatorColor: "dimgray",
+		runSimulator: false
 	},
 
 	userPresence: false,
@@ -61,9 +62,7 @@ Module.register('MMM-PIR-Sensor',{
 			if  (payload === false && this.config.powerSavingNotification === true){
 				this.sendNotification("SHOW_ALERT",{type:"notification", message:this.config.powerSavingMessage});
 			}
-			if (this.config.showIndicator) {
-				this.updateDom();
-			}
+			this.updateDom();
 		} else if (notification === 'SHOW_ALERT') {
 			this.sendNotification(notification, payload)
 		}
