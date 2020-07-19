@@ -123,6 +123,7 @@ The following properties can be configured:
 				<br><b>Default value:</b> <code>"Monitor will be turn Off by PIR module"</code>
 			</td>
 		</tr>
+		<tr>
 			<td><code>preventHDMITimeout</code></td>
 			<td>When <code>powerSaving</code> is On: time, in minutes, after which- while HDMI is off- the screen will be briefly turned on and off again, periodically. This is to avoid older HDMI screens from automatically turning Off due to "No Signal".
 				<br><b>Possible values:</b> <code>0-10</code>
@@ -130,15 +131,69 @@ The following properties can be configured:
 				<br><b>Note:</b>0 value means that this feature is turned off.
 			</td>
 		</tr>    
-    <tr>
+                <tr>
 			<td><code>supportCEC</code></td>
 		        <td>When <code>powerSaving</code> is On: support CEC to turn monitor ON or OFF as well, not just the HDMI circuit in the RPI.
 				<br><b>Possible values:</b> <code>boolean</code>
 				<br><b>Default value:</b> <code>false</code>
 			</td>
 		</tr>    
+                <tr>
+			<td><code>presenceIndicator</code></td>
+			<td>When module <code>position</code> is defined, thus it is <b>visible</b>, display an indicator when <code>USER_PRESENCE</code> is detected.
+				<br><b>Possible values:</b> <code>Font Awesome icons</code> [See here](https://fontawesome.com/icons?d=gallery)
+				<br><b>Default value:</b> <code>fa-bullseye</code>			
+				<br><b>Note: </b> Not displayed of set to <code>null</code>
+			</td>
+		</tr>    
+                <tr>
+			<td><code>presenceIndicatorColor</code></td>
+			<td>The color of <code>presenceIndicator</code>, if defined.
+				<br><b>Possible values:</b> <code>color value</code>
+				<br><b>Default value:</b> <code>red</code>
+				<br><b>Note: </b> Not displayed of set to <code>null</code>
+			</td>
+		</tr>    
+                <tr>
+			<td><code>presenceOffIndicator</code></td>
+			<td>When module <code>position</code> is defined, thus it is <b>visible</b>, display an indicator when <code>USER_PRESENCE</code> is <b>not</b> detected.
+				<br><b>Possible values:</b> <code>Font Awesome icons</code> [See here](https://fontawesome.com/icons?d=gallery)
+				<br><b>Default value:</b> <code>null</code>
+				<br><b>Note: </b> Not displayed of set to <code>null</code>
+			</td>
+		</tr>    
+                <tr>
+			<td><code>presenceOffIndicatorColor</code></td>
+			<td>The color of <code>presenceOffIndicator</code>, if defined.
+				<br><b>Possible values:</b> <code>color value</code>
+				<br><b>Default value:</b> <code>dimgray</code>
+				<br><b>Note: </b> Not displayed of set to <code>null</code>
+			</td>
+		</tr>    
 	</tbody>
 </table>
+
+## Example
+
+To use this module, add it to the modules array in the `config/config.js` file:
+````javascript
+modules: [
+	{
+		module: 'MMM-PIR-Sensor', 
+		position: "top_center", // Remove this line to avoid having an visible indicator
+		config: {
+			sensorPin: 23,
+			powerSavingDelay: 60, // Turn HDMI OFF after 60 seconds of no motion, until motion is detected again
+			preventHDMITimeout: 4, // Turn HDMI ON and OFF again every 4 minutes when power saving, to avoid LCD/TV timeout
+			supportCEC: true, 
+			presenceIndicator: "fa-eye", // Customizing the indicator
+			presenceOffIndicator: "fa-eye", // Customizing the indicator
+			presenceIndicatorColor: "#f51d16", // Customizing the indicator
+			presenceOffIndicatorColor: "#2b271c" // Customizing the indicator
+		}
+	}
+]
+````
 
 ## Developer Notes
 This module broadcasts a `USER_PRESENCE` notification with the payload beeing `true` or `false` you can use it to pause or disable your module.
