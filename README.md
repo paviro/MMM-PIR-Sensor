@@ -138,7 +138,7 @@ The following properties can be configured:
 				<br><b>Default value:</b> <code>false</code>
 			</td>
 		</tr>    
-                <tr>
+    <tr>
 			<td><code>presenceIndicator</code></td>
 			<td>When module <code>position</code> is defined, thus it is <b>visible</b>, display an indicator when <code>USER_PRESENCE</code> is detected.
 				<br><b>Possible values:</b> <code>Font Awesome icons</code> [See here](https://fontawesome.com/icons?d=gallery)
@@ -170,6 +170,15 @@ The following properties can be configured:
 				<br><b>Note: </b> Not displayed of set to <code>null</code>
 			</td>
 		</tr>    
+		<tr>
+			<td><code>runSimulator</code></td>
+			<td>Turn on a simulator that will send <code>USER_PRESENCE ON</code> every 20 seconds, and <code>USER_PRESENCE OFF</code> one second after that. 
+				<br>This is handy when you want to work on the configuration of the mirror without having to stand up in front of it in order to test.
+				<br><b>Possible values:</b> <code>boolean</code>
+				<br><b>Default value:</b> <code>false</code>
+				<br><b>Note: </b> Don't forget to this one off when using the actual IR sensor!
+			</td>
+		</tr>
 	</tbody>
 </table>
 

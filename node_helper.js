@@ -182,6 +182,14 @@ module.exports = NodeHelper.create({
 
             this.started = true;
 
+	    if (this.config.runSimulator) {
+	    	setInterval(function(){ 
+			self.sendSocketNotification('USER_PRESENCE', true);
+			setTimeout(function() {
+				self.sendSocketNotification('USER_PRESENCE', false);
+			}, 1000);
+		    }, 20000);
+	    }
         } else if (notification === 'SCREEN_WAKEUP') {
             this.activateMonitor();
         }

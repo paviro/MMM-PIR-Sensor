@@ -25,7 +25,8 @@ Module.register('MMM-PIR-Sensor',{
 		presenceIndicator: "fa-bullseye",
 		presenceIndicatorColor: "red",
 		presenceOffIndicator: null,
-		presenceOffIndicatorColor: "dimgray"
+		presenceOffIndicatorColor: "dimgray",
+		runSimulator: false
 	},
 
 	userPresence: false,
