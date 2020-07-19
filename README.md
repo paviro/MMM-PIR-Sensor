@@ -143,7 +143,7 @@ The following properties can be configured:
 			<td>When module <code>position</code> is defined, thus it is <b>visible</b>, display an indicator when <code>USER_PRESENCE</code> is detected.
 				<br><b>Possible values:</b> <code>Font Awesome icons</code> [See here](https://fontawesome.com/icons?d=gallery)
 				<br><b>Default value:</b> <code>fa-bullseye</code>			
-				<br><b>Note: </b> Not displayed of set to <code>null</code>
+				<br><b>Note: </b> Not displayed if set to <code>null</code>
 			</td>
 		</tr>    
                 <tr>
@@ -151,7 +151,7 @@ The following properties can be configured:
 			<td>The color of <code>presenceIndicator</code>, if defined.
 				<br><b>Possible values:</b> <code>color value</code>
 				<br><b>Default value:</b> <code>red</code>
-				<br><b>Note: </b> Not displayed of set to <code>null</code>
+				<br><b>Note: </b> <code>presenceIndicator</code> is not displayed if this parameter is set to <code>null</code>
 			</td>
 		</tr>    
                 <tr>
@@ -159,7 +159,7 @@ The following properties can be configured:
 			<td>When module <code>position</code> is defined, thus it is <b>visible</b>, display an indicator when <code>USER_PRESENCE</code> is <b>not</b> detected.
 				<br><b>Possible values:</b> <code>Font Awesome icons</code> [See here](https://fontawesome.com/icons?d=gallery)
 				<br><b>Default value:</b> <code>null</code>
-				<br><b>Note: </b> Not displayed of set to <code>null</code>
+				<br><b>Note: </b> Not displayed if set to <code>null</code>
 			</td>
 		</tr>    
                 <tr>
@@ -167,7 +167,7 @@ The following properties can be configured:
 			<td>The color of <code>presenceOffIndicator</code>, if defined.
 				<br><b>Possible values:</b> <code>color value</code>
 				<br><b>Default value:</b> <code>dimgray</code>
-				<br><b>Note: </b> Not displayed of set to <code>null</code>
+				<br><b>Note: </b> <code>presenceOffIndicator</code> is not displayed if this parameter is set to <code>null</code>
 			</td>
 		</tr>    
 		<tr>
@@ -176,7 +176,7 @@ The following properties can be configured:
 				<br>This is handy when you want to work on the configuration of the mirror without having to stand up in front of it in order to test.
 				<br><b>Possible values:</b> <code>boolean</code>
 				<br><b>Default value:</b> <code>false</code>
-				<br><b>Note: </b> Don't forget to this one off when using the actual IR sensor!
+				<br><b>Note: </b> Don't forget to turn this one off when using the actual IR sensor!
 			</td>
 		</tr>
 	</tbody>
