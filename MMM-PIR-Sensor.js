@@ -21,15 +21,48 @@ Module.register('MMM-PIR-Sensor',{
 		powerSaving: true,
 		powerSavingDelay: 0,
 		powerSavingNotification: false,
-		powerSavingMessage: "Monitor will be turn Off by PIR module", 
+		powerSavingMessage: "Monitor will be turn Off by PIR module",
+		presenceIndicator: "fa-bullseye",
+		presenceIndicatorColor: "red",
+		presenceOffIndicator: null,
+		presenceOffIndicatorColor: "dimgray"
+	},
+
+	userPresence: false,
+
+	getStyles: function() {
+		return [
+			'font-awesome.css'
+		];
+	},
+
+	getDom: function() {
+		var wrapper = document.createElement("i");
+		if (this.userPresence) {
+			if (this.config.presenceIndicator && this.config.presenceIndicatorColor) {
+				wrapper.className = "fas " + this.config.presenceIndicator;
+				wrapper.style = "color: " + this.config.presenceIndicatorColor + ";";
+			}
+		}
+		else {
+			if (this.config.presenceOffIndicator && this.config.presenceOffIndicatorColor) {
+				wrapper.className = "fas " + this.config.presenceOffIndicator;
+				wrapper.style = "color: " + this.config.presenceOffIndicatorColor + ";";
+			}
+		}
+		return wrapper;
 	},
 
 	// Override socket notification handler.
 	socketNotificationReceived: function (notification, payload) {
 		if (notification === 'USER_PRESENCE') {
-			this.sendNotification(notification, payload)
-			if (payload === false && this.config.powerSavingNotification === true){
+			this.userPresence = payload;
+			this.sendNotification(notification, payload);
+			if  (payload === false && this.config.powerSavingNotification === true){
 				this.sendNotification("SHOW_ALERT",{type:"notification", message:this.config.powerSavingMessage});
+			}
+			if (this.config.showIndicator) {
+				this.updateDom();
 			}
 		} else if (notification === 'SHOW_ALERT') {
 			this.sendNotification(notification, payload)
