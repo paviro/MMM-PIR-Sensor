@@ -22,7 +22,9 @@ Module.register('MMM-PIR-Sensor',{
 		powerSavingDelay: 0,
 		powerSavingNotification: false,
 		powerSavingMessage: "Monitor will be turn Off by PIR module",
-		suspendResume: true
+		suspendResume: true,
+		classesActive: "fas fa-user",
+		classesInactive: "far fa-user inactive"
 	},
 	user_present: false,
 
@@ -75,10 +77,7 @@ Module.register('MMM-PIR-Sensor',{
 	getDom: function() {
 		var wrapper;
 		wrapper = document.createElement("div");
-		wrapper.className = this.config.classes + " far fa-user";
-		if(!this.user_present) {
-			wrapper.className += " inactive";
-		}
+		wrapper.className = this.config.classes + " " + (this.user_present ? this.config.classesActive : this.config.classesInactive);
 		return wrapper;
 	},
 
