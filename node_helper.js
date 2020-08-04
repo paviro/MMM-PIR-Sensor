@@ -34,7 +34,7 @@ module.exports = NodeHelper.create({
                     exec("/usr/bin/vcgencmd display_power 1", null);
 	 	}
  	        if (self.config.supportCEC)
-    	            exec("echo 'on o' | cec-client -s -d 1");
+    	            exec("echo 'on 0' | cec-client -s -d 1");
             });
         }
 	if (this.briefHDMIWakeupInterval) {
