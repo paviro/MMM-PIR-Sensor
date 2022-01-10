@@ -1,6 +1,6 @@
 {
   "name": "Magic-Mirror-Module-PIR-Sensor",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "PIR motion sensor module for the Magic Mirror.",
   "repository": {
     "type": "git",
@@ -21,10 +21,10 @@
   },
   "homepage": "https://github.com/paviro/MMM-PIR-Sensor#readme",
   "scripts": {
-    "postinstall": "node_modules/.bin/electron-rebuild -e ../../node_modules/electron"
+    "postinstall": "node_modules/.bin/MagicMirror-rebuild -e ../../node_modules/electron"
   },
   "dependencies": {
     "onoff": "latest",
-    "electron-rebuild": "^1.2.1"
+    "magicmirror-rebuild": "^1.0.4"
   }
 }
