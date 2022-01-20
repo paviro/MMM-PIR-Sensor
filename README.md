@@ -138,9 +138,9 @@ The following properties can be configured:
 This module broadcasts a `USER_PRESENCE` notification with the payload beeing `true` or `false` you can use it to pause or disable your module.
 
 ## Dependencies
-- electron-rebuild
-- node-abi
-- onoff
+- [electron-rebuild](https://www.npmjs.com/package/electron-rebuild)
+- [node-abi](https://www.npmjs.com/package/node-abi)
+- [onoff](https://www.npmjs.com/package/onoff)
 
 ### Updating dependencies (devellopers)
 - `npm outdated`
@@ -149,6 +149,8 @@ This module broadcasts a `USER_PRESENCE` notification with the payload beeing `t
 
 ### Work around
 `assertion failed: Pointer compression can be enabled only for 64-bit architectures` can be temprarily resolved by adding `'v8_enable_pointer_compression': 0` to `variables` in `/home/pi/MagicMirror/modules/MMM-PIR-Sensor/node_modules/node-gyp/addon.gypi` 
+
+Filed an [issue with epoll](https://github.com/fivdi/epoll/issues/45).
 
 The MIT License (MIT)
 =====================
