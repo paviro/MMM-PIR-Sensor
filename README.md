@@ -138,7 +138,17 @@ The following properties can be configured:
 This module broadcasts a `USER_PRESENCE` notification with the payload beeing `true` or `false` you can use it to pause or disable your module.
 
 ## Dependencies
-- [wiring-pi](https://www.npmjs.com/package/wiring-pi) (installed via `npm install`)
+- electron-rebuild
+- node-abi
+- onoff
+
+### Updating dependencies (devellopers)
+- `npm outdated`
+- `npm update`
+- `npm install <package>@latest` for major updates
+
+### Work around
+`assertion failed: Pointer compression can be enabled only for 64-bit architectures` can be temprarily resolved by adding `'v8_enable_pointer_compression': 0` to `variables` in `/home/pi/MagicMirror/modules/MMM-PIR-Sensor/node_modules/node-gyp/addon.gypi` 
 
 The MIT License (MIT)
 =====================
