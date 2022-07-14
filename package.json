@@ -24,8 +24,8 @@
     "postinstall": "node_modules/.bin/MagicMirror-rebuild"
   },
   "dependencies": {
-    "magicmirror-rebuild": "^1.0.0",
-    "node-abi": "^3.8.0",
+    "magicmirror-rebuild": "^1.0.7",
+    "node-abi": "^3.22.0",
     "onoff": "^6.0.3"
   }
 }
