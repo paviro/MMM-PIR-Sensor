@@ -141,6 +141,7 @@ This module broadcasts a `USER_PRESENCE` notification with the payload beeing `t
 - [electron-rebuild](https://www.npmjs.com/package/electron-rebuild)
 - [node-abi](https://www.npmjs.com/package/node-abi)
 - [onoff](https://www.npmjs.com/package/onoff)
+- [MagicMirror-rebuild](https://github.com/bugsounet/MagicMirror-rebuild)
 
 ### Updating dependencies (devellopers)
 - `npm outdated`
